@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faturamento Mensal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cálculo do Percentual de Faturamento</h1>
+    <button onclick="calcularPercentuais()">Calcular Percentuais</button>
+    
+    <table id="resultado">
+        <thead>
+            <tr>
+                <th>Estado</th>
+                <th>Faturamento (R$)</th>
+                <th>Percentual (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>SP</td>
+                <td id="sp"></td>
+                <td id="percentSp"></td>
+            </tr>
+            <tr>
+                <td>RJ</td>
+                <td id="rj"></td>
+                <td id="percentRj"></td>
+            </tr>
+            <tr>
+                <td>MG</td>
+                <td id="mg"></td>
+                <td id="percentMg"></td>
+            </tr>
+            <tr>
+                <td>ES</td>
+                <td id="es"></td>
+                <td id="percentEs"></td>
+            </tr>
+            <tr>
+                <td>Outros</td>
+                <td id="outros"></td>
+                <td id="percentOutros"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function calcularPercentuais() {
+            const faturamento = {
+                SP: 67836.43,
+                RJ: 36678.66,
+                MG: 29229.88,
+                ES: 27165.48,
+                Outros: 19849.53
+            };
+
+            const totalFaturamento = Object.values(faturamento).reduce((acc, val) => acc + val, 0);
+
+            document.getElementById('sp').innerText = `R$ ${faturamento.SP.toFixed(2)}`;
+            document.getElementById('rj').innerText = `R$ ${faturamento.RJ.toFixed(2)}`;
+            document.getElementById('mg').innerText = `R$ ${faturamento.MG.toFixed(2)}`;
+            document.getElementById('es').innerText = `R$ ${faturamento.ES.toFixed(2)}`;
+            document.getElementById('outros').innerText = `R$ ${faturamento.Outros.toFixed(2)}`;
+
+            for (const estado in faturamento) {
+                const percentual = (faturamento[estado] / totalFaturamento) * 100;
+                document.getElementById(`percent${estado}`).innerText = `${percentual.toFixed(2)}%`;
+            }
+        }
+    </script>
+</body>
+</html>
+
